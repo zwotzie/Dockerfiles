@@ -41,7 +41,7 @@ echo "all daemons started"
 echo "=========================================================="
 
 export PRESTO_HOME=/usr/lib/presto
-su presto -c "$PRESTO_HOME/bin/launcher run"
+su rh -c "$PRESTO_HOME/bin/launcher run"
 
 
 

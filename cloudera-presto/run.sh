@@ -22,7 +22,7 @@ ID=$(docker run  \
  -p  8888:8888 \
  -d hadoop)
 
-echo "+-----------     hadoop-zoo started...    -----------------+"
+echo "+-----------     hadoop started...    -----------------+"
 echo "| ContainerId      : " ${ID:0:12}
 echo "| login into       : docker exec -it ${ID:0:12} sh"
 echo "| tail logs        : docker logs -f "${ID:0:12}
