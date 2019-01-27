@@ -1,5 +1,10 @@
 FROM cloudera/quickstart
 
+ARG PRESTO_VERSION=0.215
+
+ARG ADD_USER=presto
+ARG PRESTO_USER=${ADD_USER}
+
 # https://github.com/CentOS/sig-cloud-instance-images/issues/15
 RUN yum install -y --nogpgcheck --disablerepo "*cloudera*" yum-plugin-ovl
 
@@ -8,9 +13,8 @@ RUN yum install -y --nogpgcheck --disablerepo "*cloudera*" yum-plugin-ovl
 COPY java-1.8*.rpm /
 
 RUN yum -y --disablerepo "*cloudera*" localinstall /java-1.8.0-openjdk-headless-1.8.0.191.b12-0.el6_10.x86_64.rpm \
+    && rm /java-1.8*.rpm \
     && yum clean all
-
-ARG PRESTO_VERSION=0.215
 
 LABEL Description="Presto SQL" \
       "Presto SQL Version"="$PRESTO_VERSION"
@@ -46,10 +50,14 @@ COPY etc/presto /etc/presto/
 COPY beeline.sh /usr/local/bin/beeline.sh
 
 # Add user support not running as root
-RUN set -euxo pipefail && \
-    mkdir -vp /var/lib/presto /var/log/presto && \
-    useradd presto && \
-    chown -R presto /etc/presto /usr/lib/presto /var/lib/presto /var/log/presto
+RUN set -euxo pipefail \
+    && mkdir -vp /var/lib/presto /var/log/presto \
+#    && useradd ${PRESTO_USER} \
+    && useradd ${ADD_USER} \
+    && usermod -a -G hadoop ${ADD_USER} \
+    && usermod -a -G hdfs ${ADD_USER} \
+    && usermod -a -G ${ADD_USER} hdfs \
+    && chown -R ${PRESTO_USER} /etc/presto /usr/lib/presto /var/lib/presto /var/log/presto
 
 ADD boot.sh /
 

@@ -40,8 +40,12 @@ done
 echo "all daemons started"
 echo "=========================================================="
 
+# run presto as user ${PRESTO_USER}
 export PRESTO_HOME=/usr/lib/presto
-su rh -c "$PRESTO_HOME/bin/launcher run"
+# foreground:
+# su pentaho -c "$PRESTO_HOME/bin/launcher run"
+# run daemonized:
+su presto -c "$PRESTO_HOME/bin/launcher start"
 
 
 
