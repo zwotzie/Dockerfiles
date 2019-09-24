@@ -1,0 +1,4 @@
+.idea/
+/Dockerfile.proxy
+/docker-compose-proxy.yml
+# hive-kafka-handler*
