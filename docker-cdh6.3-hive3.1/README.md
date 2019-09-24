@@ -24,3 +24,7 @@ While the Hadoop Docker container is running, you can always get the urls' list 
 
     print-urls.sh
 
+### How to use
+build.sh - will create the image
+
+run_container.sh will start the container with all necessary ports

@@ -4,7 +4,7 @@ set -euo pipefail
 ID=$(docker run  \
  --restart unless-stopped \
  --hostname=quickstart.cloudera \
- --name cdh620 \
+ --name cdh630 \
  -p 50010:50010 \
  -p 50020:50020 \
  -p 50070:50070 \
@@ -25,9 +25,9 @@ ID=$(docker run  \
  -p  8088:8088 \
  -p  8888:8888 \
  -p  7180:7180 \
- -d cdh:6.2.0)
+ -d cdh:6.3.0)
 
-echo "+-----------  hadoop cdh 6.2.0 started...  -----------------+"
+echo "+-----------  hadoop cdh 6.3.0 started...  -----------------+"
 echo "| ContainerId      : " ${ID:0:12}
 echo "| login into       : docker exec -it ${ID:0:12} sh"
 echo "| tail logs        : docker logs -f "${ID:0:12}

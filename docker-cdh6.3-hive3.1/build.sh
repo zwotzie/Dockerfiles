@@ -4,7 +4,7 @@ set -euxo pipefail
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 SERVICE=cdh
-SERVICE_VERSION=6.2.0
+SERVICE_VERSION=6.3.0
 
 IMAGE=$SERVICE:$SERVICE_VERSION
 
